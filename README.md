@@ -3,7 +3,6 @@
 [![R](https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white)](https://www.r-project.org/)
 [![Bioconductor](https://img.shields.io/badge/Bioconductor-2C8FBD?style=for-the-badge&logo=bioconductor&logoColor=white)](https://bioconductor.org/)
 [![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)](https://markdown.com/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 [![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-9B59B6?style=for-the-badge&logo=wikipedia&logoColor=white)](https://deepwiki.com/KIKW12/covid-variants-analysis)
 
 ## 📋 Overview
