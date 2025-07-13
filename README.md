@@ -234,15 +234,6 @@ This analysis provides valuable insights for:
 - Ensure all FASTA files are in the working directory
 - Verify CSV annotation files are present
 - Check R package dependencies are installed
-
-## 👨‍💻 Author
-
-**Juan Enrique Ayala Zapata**  
-🎓 **Student ID**: A01711235  
-🔬 **Field**: Computational Biology  
-📧 **Contact**: [Your Email]  
-🔗 **LinkedIn**: [Your LinkedIn]  
-
 ---
 
 ## 📚 References & Resources
