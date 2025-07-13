@@ -1,0 +1,482 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Evidencia 1 \textbar{} Análisis Inicial},
+  pdfauthor={Juan Enrique Ayala Zapata-A01711235},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Evidencia 1 \textbar{} Análisis Inicial}
+\author{Juan Enrique Ayala Zapata-A01711235}
+\date{2024-04-26}
+
+\begin{document}
+\maketitle
+
+\hypertarget{parte-1-responde-justificadamente-las-siguientes-preguntas}{%
+\section{Parte 1: Responde justificadamente las siguientes
+preguntas}\label{parte-1-responde-justificadamente-las-siguientes-preguntas}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Investiga, ¿Cuál es la situación actual de COVID-19 a nivel mundial,
+  en México, en tu estado de origen y en tu municipio, alcaldía o
+  colonia? De acuerdo al sitio de la Johns Hopkins University \&
+  Medicine, dejó de colectar información sobre el COVID-19 el 10 de
+  marzo de 2023, debido a que dejó de ser considerada como pandemia,
+  pero de acuerdo a la última medición se tiene la información de que
+  había 676,609,955 casos activos; con 6,881,955 muertos registrados en
+  el mundo.
+\end{enumerate}
+
+En México, a la última fecha de la colección de datos por el Johns
+Hopkins se tiene un total de 7,483,444 casos; habiendo 333,188 muertes
+confirmadas hasta la última fecha.
+
+De acuerdo a la Secretaría de Salud de Michoacán, a la última fecha de
+actualización que es el 29 de junio de 2023, en toda la entidad
+federativa se contaron un total hasta la fehca de 221,611 casos
+confirmados; habiendo un total contado hasta la fecha de 8,83
+defunciones.
+
+Así mismo, en la entidad de Lázaro Cárdenas, hubo un total de 22,165
+casos confirmados hasta la última fecha de corte, sin defunciones
+reportadas en la misma fecha.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  ¿Cuál fue la primera variante del virus que se propagó a todo el
+  mundo? De acuerdo al sitio nextstrain.org/ncov/global, la primera
+  variante que se propagó a todo el mundo fue la Wuhan/WH04/2024.
+\item
+  ¿Cuáles son las otras variantes del virus que existen en otras
+  regiones del mundo? De acuerdo al National Library of Medicine y la
+  OMS (a fecha de 13 de julio de 2021), existen 10 variantes de
+  preocupación y de interés:
+\end{enumerate}
+
+Variantes de preocupación (Linaje de Pangolín): Alpha (B.1.1.7)
+Beta(B.1.351) Gamma(P.1) Delta(B.1.617.2)
+
+Variantes de interés (Linaje de Pangolín): Epsilon(B.1.427/B.1.429)
+Zeta(P.2) Eta(B.1.525) Theta(P.3) Iota(B.1.526) Kappa(B.1.617.1)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  ¿Cómo buscarías información de la variante del virus en tu país? Para
+  obtener la información necesaria sobre la variante del virus en mi
+  país, tengo que dirigirme a la página oficial de lsa Secretaría de
+  Salud, para así obtener la infotmación más veraz sobre el virus en
+  México.
+\item
+  Imagina que te encuentras en una situación similar a la de Li
+  Wenliang, médico chino que intentó alertar sobre el brote de
+  coronavirus en su país, pero fue detenido por las autoridades y
+  obligado a retractarse, ¿qué harías en su caso? Selecciona un
+  inciso:a) Lo reportas al centro de investigación o la universidad. b)
+  Lo reportas a la prensa. c) Guardas la información. Como persona en la
+  misma situación que Li Wenliang, yo reportaría el caso a un centro de
+  investigación o a universidades para que trabajaran de manera pronta
+  en encontrar la cura y/o vacuna para la enfermedad, para así prevenir
+  la mayor cantidad de muertes. Así mismo, como médico, me vería en la
+  oblicación ética de reportarlo, debido a que con esto se lograría
+  mitigar el riesgo de propagación de la enfermedad.
+\end{enumerate}
+
+\hypertarget{parte-2-realiza-lo-siguiente-en-un-script-de-r-y-cuxf3digo}{%
+\section{Parte 2: Realiza lo siguiente en un script de R y
+código:}\label{parte-2-realiza-lo-siguiente-en-un-script-de-r-y-cuxf3digo}}
+
+\hypertarget{cargar-librerias}{%
+\subsection{Cargar librerias}\label{cargar-librerias}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(Biostrings)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: BiocGenerics
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'BiocGenerics'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     IQR, mad, sd, var, xtabs
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+##     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+##     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+##     Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+##     table, tapply, union, unique, unsplit, which.max, which.min
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: S4Vectors
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: stats4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'S4Vectors'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:utils':
+## 
+##     findMatches
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     expand.grid, I, unname
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: IRanges
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'IRanges'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:grDevices':
+## 
+##     windows
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: XVector
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: GenomeInfoDb
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Biostrings'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     strsplit
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{asigna-a-un-vector-los-nombres-de-los-diferentes-archivos}{%
+\subsection{Asigna a un vector los nombres de los diferentes
+archivos}\label{asigna-a-un-vector-los-nombres-de-los-diferentes-archivos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variantes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"wuhan.fna"}\NormalTok{, }\StringTok{"ALPHA.fasta"}\NormalTok{, }\StringTok{"beta.fasta"}\NormalTok{, }\StringTok{"GAMMA.fasta"}\NormalTok{, }\StringTok{"Omnicron.fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{asigna-a-un-vector-los-nombres-de-las-variantes}{%
+\subsection{Asigna a un vector los nombres de las
+variantes}\label{asigna-a-un-vector-los-nombres-de-las-variantes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nombre\_variantes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Wuhan"}\NormalTok{, }\StringTok{"Alpha"}\NormalTok{, }\StringTok{"Beta"}\NormalTok{, }\StringTok{"Gamma"}\NormalTok{, }\StringTok{"Omicron"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{funcion-para-contar-las-bases-de-adn}{%
+\subsection{Funcion para contar las bases de
+ADN}\label{funcion-para-contar-las-bases-de-adn}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{contar\_bases }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(ADN) \{}
+\NormalTok{  a\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_count}\NormalTok{(ADN, }\AttributeTok{pattern =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{  t\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_count}\NormalTok{(ADN, }\AttributeTok{pattern =} \StringTok{"T"}\NormalTok{)}
+\NormalTok{  g\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_count}\NormalTok{(ADN, }\AttributeTok{pattern =} \StringTok{"G"}\NormalTok{)}
+\NormalTok{  c\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_count}\NormalTok{(ADN, }\AttributeTok{pattern =} \StringTok{"C"}\NormalTok{)}
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Base =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"T"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"C"}\NormalTok{), }\AttributeTok{Count =} \FunctionTok{c}\NormalTok{(a\_count, t\_count, g\_count, c\_count))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{funciuxf3n-para-calcular-gc}{%
+\subsection{Función para calcular
+\%GC}\label{funciuxf3n-para-calcular-gc}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{adn\_info }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(ADN) \{}
+\NormalTok{  adn\_len }\OtherTok{\textless{}{-}} \FunctionTok{nchar}\NormalTok{(ADN)}
+\NormalTok{  gc\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_count}\NormalTok{(ADN, }\AttributeTok{pattern =} \StringTok{"G|C"}\NormalTok{)}
+\NormalTok{  gc\_percentage }\OtherTok{\textless{}{-}}\NormalTok{ (gc\_count }\SpecialCharTok{/}\NormalTok{ adn\_len) }\SpecialCharTok{*} \DecValTok{100}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Tamaño de las bases:"}\NormalTok{, adn\_len, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Porcentaje de GC:"}\NormalTok{, gc\_percentage, }\StringTok{"\%}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{funcion-para-generar-secuencia-contrasentido}{%
+\section{Funcion para generar secuencia
+contrasentido}\label{funcion-para-generar-secuencia-contrasentido}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{generar\_contrasentido }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(ADN\_set) \{}
+\NormalTok{  contrasentido }\OtherTok{\textless{}{-}} \FunctionTok{reverseComplement}\NormalTok{(ADN\_set)}
+  \FunctionTok{return}\NormalTok{(contrasentido)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{main}{%
+\subsection{Main}\label{main}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Main}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(variantes)) \{}
+  \CommentTok{\# Imprime el nombre de la variante}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Nombre de la variante:"}\NormalTok{, nombre\_variantes[i], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  
+  \CommentTok{\# Lee el archivo de ADN y cuenta las bases}
+\NormalTok{  ADN\_set }\OtherTok{\textless{}{-}} \FunctionTok{readDNAStringSet}\NormalTok{(variantes[i])}
+\NormalTok{  adn }\OtherTok{\textless{}{-}} \FunctionTok{toString}\NormalTok{(ADN\_set)}
+\NormalTok{  base\_counts }\OtherTok{\textless{}{-}} \FunctionTok{contar\_bases}\NormalTok{(adn)}
+  
+  \CommentTok{\# Gráfico de barras para las bases de ADN}
+  \FunctionTok{ggplot}\NormalTok{(base\_counts, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Base, }\AttributeTok{y =}\NormalTok{ Count, }\AttributeTok{fill =}\NormalTok{ Base)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Cantidad de bases nitrogenadas de"}\NormalTok{, nombre\_variantes[i]),}
+         \AttributeTok{x =} \StringTok{"Base Nitrogenada"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme\_minimal}\NormalTok{()}
+  
+  \CommentTok{\# Mostrar el gráfico}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{ggplot}\NormalTok{(base\_counts, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Base, }\AttributeTok{y =}\NormalTok{ Count, }\AttributeTok{fill =}\NormalTok{ Base)) }\SpecialCharTok{+}
+          \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+          \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Cantidad de bases nitrogenadas de"}\NormalTok{, nombre\_variantes[i]),}
+               \AttributeTok{x =} \StringTok{"Base Nitrogenada"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+          \FunctionTok{theme\_minimal}\NormalTok{())}
+  
+  \CommentTok{\# Calcula y muestra el \%GC}
+  \FunctionTok{adn\_info}\NormalTok{(adn)}
+  
+  \CommentTok{\# Genera la secuencia contrasentido y almacénala en una variable}
+\NormalTok{  contrasentido }\OtherTok{\textless{}{-}} \FunctionTok{generar\_contrasentido}\NormalTok{(ADN\_set)}
+  \CommentTok{\# Ahora puedes usar la variable \textquotesingle{}contrasentido\textquotesingle{} según sea necesario}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Nombre de la variante: Wuhan
+\end{verbatim}
+
+\includegraphics{ev01_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{verbatim}
+## Tamaño de las bases: 29903 
+## Porcentaje de GC: 37.97278 %
+## 
+## Nombre de la variante: Alpha
+\end{verbatim}
+
+\includegraphics{ev01_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\begin{verbatim}
+## Tamaño de las bases: 29884 
+## Porcentaje de GC: 37.83295 %
+## 
+## Nombre de la variante: Beta
+\end{verbatim}
+
+\includegraphics{ev01_files/figure-latex/unnamed-chunk-7-3.pdf}
+
+\begin{verbatim}
+## Tamaño de las bases: 3244622 
+## Porcentaje de GC: 37.27405 %
+## 
+## Nombre de la variante: Gamma
+\end{verbatim}
+
+\includegraphics{ev01_files/figure-latex/unnamed-chunk-7-4.pdf}
+
+\begin{verbatim}
+## Tamaño de las bases: 4699287 
+## Porcentaje de GC: 36.52482 %
+## 
+## Nombre de la variante: Omicron
+\end{verbatim}
+
+\includegraphics{ev01_files/figure-latex/unnamed-chunk-7-5.pdf}
+
+\begin{verbatim}
+## Tamaño de las bases: 208393 
+## Porcentaje de GC: 37.88371 %
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-de-gruxe1ficas}{%
+\section{Interpretación de
+gráficas}\label{interpretaciuxf3n-de-gruxe1ficas}}
+
+Las gráficas muestran la cantidad de bases nitrogrenadas presentes en
+cada cadena de ADN de cada variente de Covid-19 seleccionada para el
+estudio durante este proyecto, se puede observar que las variantes.
+
+Por ejemplo, al hacer una comparación de las bases nitrogenadas para la
+variante de Wuhan y la variante Alpha, podemos observar una ligera
+disminución de Adenida y Citocina.
+
+ASí mismo, gracias a estas gráficas podemos observar la variación de la
+cantidad de Bases Nitrogenadas del ADN de cada variante, notando así que
+en algunas variantes superan las 60,000.
+
+\hypertarget{referencias}{%
+\section{Referencias}\label{referencias}}
+
+COVID-19 Map - Johns Hopkins Coronavirus Resource Center. (s.~f.). Johns
+Hopkins Coronavirus Resource Center.
+\url{https://coronavirus.jhu.edu/map.html}
+
+De Comunicación Social, C. G. (s.~f.). Informe diario COVID-19
+Michoacán. Michoacán.
+\url{https://salud.michoacan.gob.mx/informe-diario-covid-19-michoacan-190/}
+
+Variantes del SARS-COV-2, una historia todavia inacabada-PMC. (2021, 13
+julio). National Library Of Medicine. Recuperado 24 de abril de 2024, de
+\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8275477/}
+
+Genomic Epidemiology of Novel Coronavirus. (s.~f.). Nextrain.org.
+\url{https://web.archive.org/web/20200420123520/https://nextstrain.org/ncov/global}
+
+\end{document}

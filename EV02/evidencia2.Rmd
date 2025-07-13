@@ -1,0 +1,157 @@
+---
+title: "Evidencia 2"
+author: "Juan Enrique Ayala Zapata-A01711235"
+date: "2024-05-04"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+# Parte 1: Video.
+
+Link: https://youtu.be/H10vpvGTBvs
+
+# Parte 2: Codigo:
+## Opcion a analizar: cercanía del SARS-CoV-2 con otros coronavirus humanos.
+
+## Importar librerias y asignar el espacio de trabajo.
+```{r}
+library(ade4)
+library(ape)
+library(adegenet)
+library(Biostrings)
+library(ggplot2)
+library(stringr)
+```
+
+## Longitud de las secuencias:
+```{r}
+variantes <- c("Civet.fasta", "HCoV-229E.fna", "HCoV-HKU1.fna", "HCoV-NL63.fna", "HCoV-OC43.fna", "MERS-CoV.fna", "RaTG13.fasta", "RpYN06.fasta", "SARS-CoV.fna", "SARS-CoV-2.fna")
+nombre_variantes <- c("Civet SARS-CoV", "Human Coronavirus 229E", "Human Coronavirus HKU1", "Human Coronavirus NL63", "Human Coronavirus OC43", "Middle East Respiratory Syndrome", "Bat Coronavirus RaTG13", "Betacoronavirus RpYN06", "Severe Acute Respirstory Syndrome", "Severe Acute Respirstory Syndrome 2")
+
+contar_bases <- function(ADN) {
+  a_count <- str_count(ADN, pattern = "A")
+  t_count <- str_count(ADN, pattern = "T")
+  g_count <- str_count(ADN, pattern = "G")
+  c_count <- str_count(ADN, pattern = "C")
+  n_count <- str_count(ADN, pattern = "N")
+  data.frame(Base = c("A", "T", "G", "C", "N"), Count = c(a_count, t_count, g_count, c_count, n_count))
+}
+
+datos <- list()
+nombres <- list()
+
+for (i in 1:length(variantes)) {
+  ADN_set <- readDNAStringSet(variantes[i])
+  adn <- toString(ADN_set)
+  base_counts <- contar_bases(adn)
+
+  datos[[i]] <- base_counts
+  nombres[[i]] <- nombre_variantes[i]
+}
+
+datos_combinados <- do.call(rbind, datos)
+
+datos_combinados$Variante <- rep(nombre_variantes, each = 5)
+
+dna <- fasta2DNAbin(file="usflu.fasta")
+dna
+```
+
+## Grafica de comparación de numero de ADN.
+```{r}
+
+contar_bases <- function(ADN) {
+  a_count <- str_count(ADN, pattern = "A")
+  t_count <- str_count(ADN, pattern = "T")
+  g_count <- str_count(ADN, pattern = "G")
+  c_count <- str_count(ADN, pattern = "C")
+  n_count <- str_count(ADN, pattern = "N")
+  data.frame(Base = c("A", "T", "G", "C", "N"), Count = c(a_count, t_count, g_count, c_count, n_count))
+}
+
+datos <- list()
+nombres <- list()
+
+for (i in 1:length(variantes)) {
+  ADN_set <- readDNAStringSet(variantes[i])
+  adn <- toString(ADN_set)
+  base_counts <- contar_bases(adn)
+
+  datos[[i]] <- base_counts
+  nombres[[i]] <- nombre_variantes[i]
+}
+
+datos_combinados <- do.call(rbind, datos)
+
+datos_combinados$Variante <- rep(nombre_variantes, each = 5)
+
+ggplot(datos_combinados, aes(x = Base, y = Count, fill = Base)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~Variante, scales = "free_y") +
+  labs(title = "Bases de ADN en diferentes variantes",
+       x = "Base", y = "Count") +
+  theme_minimal()
+```
+## Explicación de las gráficas de las bases del ADN
+Como se puede observer en esta gráfica, se muestra el conteo total de las bases nitrogenadas (adenina, citocina, guanina, timina) y los nucleótidos no identificados, mostrados como N. Al analizar detalladamente, podemos observar que las variantes de estudio en este proyecto, cuentan con una cantidad muy similar de Adenina y Timina, pero loas "mayores" variaciones se encuentran en la Citocina y la Guanina. 
+
+
+
+## Analisis jerárquico de las secuencias.
+
+# Elección de método JC69
+El modelo JC69 asume que todas las sustituciones tienen la misma probabilidad (cambiar una base por otra). Esta probabilidad es la misma para todos los sitios a lo largo de la secuencia de ADN. Esta última observación está relacionada con la hipótesis de que todsa las sustituciones varían de acuerdo el sitio siguiendo la distribución GAMMA, cuyo parámetro debe de ser dado por el usuario. 
+
+
+```{r}
+annot <- read.csv("usflu.annot.csv", header=TRUE, row.names=1)
+
+D <- dist.dna(dna, model = "JC69")
+length(D)
+D[is.na(D)] <- 0
+
+MatrizDG <- as.data.frame(as.matrix(D))
+table.paint(MatrizDG, cleg = 0, clabel.row = 0.5, clabel.col = 0.5)
+
+tre <- njs(D)
+plot(tre, cex = 0.6)
+title("Árbol de tipo NJ")
+
+h_cluster <- hclust(D, method = "average", members = NULL)
+plot(h_cluster, cex = 0.6)
+
+myBoots <- boot.phylo(tre, dna, function(e) root(njs((dist.dna(e, model = "JC69"))), 1))
+
+myPal <- colorRampPalette(c("red", "yellow", "green", "blue"))
+plot(tre, edge.width = 1, cex = 0.7)
+title("NJ tree + bootstrap values")
+tiplabels(frame = "none", pch = 20, col = transp(num2col(annot$year, col.pal = myPal), 0.7), cex = 3, fg = "transparent")
+temp <- pretty(1993:2008, 5)
+legend("bottomright", fill = transp(num2col(temp, col.pal = myPal), 0.7), leg = temp, ncol = 2, cex = 0.6)
+nodelabels(myBoots, cex = 0.6)
+```
+## Interpretación de las gráficas.
+
+# Matriz distancia:
+En la matriz distancia podemos observar como todos los cuadros de esta, están coloreados dependiendo de la similitud entre cada secuencia de ADN de cada variante del virus CoV a analizar en este proyecyo. Que tan "negro" esté coloreado el cuadro, significa que tan cercano es el virus respecto al otro. 
+
+# NJ Tree
+Este árbolo filogenético nos presenta las relaciones evolutivas entre los diferentes virus de la familia Coronaviridae escogidos a ser analizados en este proyecto, la longitud de cada rama representa la cantidad de tiempo que ha pasado desde que dos organismos divergieron de un ansestro común. Así mismo, las secuencias de ADN que se encuentran en la misma rama, están más relacionados entre sí que con los organismos que se encuentran en otras ramas.
+
+# Cluster Dendogram
+Nos muestra la relación entre la altura de los diferentes grupos de la familia Coronaviridae. Cuanto más corta sea la rama, más similiar es el grupo de variantes que representa. Cuanto más larga, más diferente es el grupo representado. El punto de fusión de cada rama representa la altura en que los dos grupos se fusionan en un solo grupo. Cuanto más alto sea este punto, más diferentes son los grupos. 
+
+# NJ Tree + Bootstrap Values
+Este árbolo filogenético nos presenta las relaciones evolutivas entre los diferentes virus de la familia Coronaviridae escogidos a ser analizados en este proyecto, la longitud de cada rama representa la cantidad de tiempo que ha pasado desde que dos organismos divergieron de un ansestro común. Así mismo, las secuencias de ADN que se encuentran en la misma rama, están más relacionados entre sí que con los organismos que se encuentran en otras ramas. Los valores de bootstrap que se muestran, representan la confianza que se tiene en la posición de esos nodos. Estos valores, en este árbol son elevados, lo que indica que hay una alta confianza en las relaciones evolutivas presentadas en este árbol.
+
+## Referencias
+Coronavirus disease (COVID-19) pandemic. (2024, 1 mayo). https://www.who.int/europe/emergencies/situations/covid-19
+
+Islam, A., Ferdous, J., Sayeed, M. A., Islam, S., Rahman, M. L., Abedin, J., Saha, O., Hassan, M. M., & Shirin, T. (2021). Spatial epidemiology and genetic diversity of SARS-CoV-2 and related coronaviruses in domestic and wild animals. PloS One, 16(12), e0260635. https://doi.org/10.1371/journal.pone.0260635
+
+Ge, X., Wang, N., Zhang, W., Hu, B., Li, B., Zhang, Y. Z., Zhou, J., Luo, C. M., Yang, X., Li, W., Wang, B., Zhang, Y., Li, Z. X., & Shi, Z. L. (2016). Coexistence of multiple coronaviruses in several bat colonies in an abandoned mineshaft. Virologica Sinica/Virologica Sinica, 31(1), 31-40. https://doi.org/10.1007/s12250-016-3713-9
+
+Pavan, M., Bassani, D., Sturlese, M., & Moro, S. (2022). Bat coronaviruses related to SARS-CoV-2: what about their 3CL proteases (MPro)? Journal Of Enzyme Inhibition And Medicinal Chemistry, 37(1), 1077-1082. https://doi.org/10.1080/14756366.2022.2062336
+
+SARS-CoV-2, SARS-CoV, and MERS-COV: A comparative overview. (2020). PubMed. https://pubmed.ncbi.nlm.nih.gov/32275259/
